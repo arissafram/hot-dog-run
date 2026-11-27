@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Hot Dog Run</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #fff;
+      /* Taps anywhere play: no double-tap zoom, text selection or tap flash */
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    #game {
+      margin: 16px auto 0;
+      width: min(800px, calc(100vw - 32px));
+      height: clamp(288px, calc(100dvh - 32px), 360px);
+    }
+  </style>
+  <!-- Full-page game straight from the source files: no build step -->
+  <script src="vendor/phaser.min.js"></script>
+</head>
+<body>
+  <div id="game"></div>
+  <script type="module">
+    import { createGame } from './game.js';
+
+    // A tap anywhere on the page plays. Add ?invincible to the URL to test without crashing.
+    createGame(window.Phaser, document.getElementById('game'), {
+      pointerTarget: window,
+      invincible: new URLSearchParams(location.search).has('invincible')
+    });
+  </script>
+</body>
+</html>

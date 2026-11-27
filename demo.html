@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hot Dog Run embed demo</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 840px; margin: 32px auto; padding: 0 16px; color: #222; line-height: 1.5; }
+    code { background: #f2f2f2; padding: 1px 4px; border-radius: 3px; }
+    hot-dog-run, #box { border: 1px solid #ccc; }
+    #box { width: 100%; max-width: 800px; height: 320px; }
+  </style>
+  <!-- Run `npm run build` first. From a CDN this would be https://unpkg.com/hot-dog-run -->
+  <script type="module" src="./dist/hot-dog-run.js"></script>
+</head>
+<body>
+  <h1>Hot Dog Run embed demo</h1>
+  <p>This page is long, so you can check that it still scrolls.</p>
+
+  <h2>Custom element</h2>
+  <p><code>&lt;hot-dog-run&gt;&lt;/hot-dog-run&gt;</code></p>
+  <hot-dog-run capture-keys></hot-dog-run>
+
+  <h2><code>mount(el)</code> with your own images</h2>
+  <p>Obstacles loaded from image URLs: the kettle grill and the hot dog pile, with no specials.
+    <button id="pause">Pause</button> <button id="toggle">Unmount</button></p>
+  <div id="box"></div>
+
+  <p style="height: 60vh">More page below the games…</p>
+
+  <script type="module">
+    import { mount } from './dist/hot-dog-run.js';
+
+    const box = document.getElementById('box');
+    const options = {
+      storageKey: 'hot-dog-run-demo',
+      obstacles: [
+        { src: 'sprites/src/grill-kettle.png', height: [30, 50] },
+        { src: 'sprites/src/hot-dog-pile.png', height: 30, weight: 0.5 }
+      ],
+      specials: []
+    };
+    let game = mount(box, options);
+    let paused = false;
+
+    document.getElementById('pause').onclick = (e) => {
+      paused = !paused;
+      paused ? game.pause() : game.resume();
+      e.target.textContent = paused ? 'Resume' : 'Pause';
+    };
+    document.getElementById('toggle').onclick = (e) => {
+      if (game) { game.destroy(); game = null; e.target.textContent = 'Mount'; }
+      else { game = mount(box, options); e.target.textContent = 'Unmount'; }
+    };
+  </script>
+</body>
+</html>
