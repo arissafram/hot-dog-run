@@ -1,0 +1,64 @@
+{
+  "name": "hot-dog-run",
+  "version": "0.1.0",
+  "description": "A one-button endless runner you can drop into any page as <hot-dog-run>, mount(el) or <HotDogRun />.",
+  "private": true,
+  "type": "module",
+  "main": "./dist/hot-dog-run.js",
+  "module": "./dist/hot-dog-run.js",
+  "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./dist/hot-dog-run.js",
+      "default": "./dist/hot-dog-run.js"
+    },
+    "./react": {
+      "types": "./types/react.d.ts",
+      "import": "./dist/react.js",
+      "default": "./dist/react.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "types"
+  ],
+  "sideEffects": true,
+  "keywords": [
+    "game",
+    "endless-runner",
+    "web-component",
+    "custom-element",
+    "react",
+    "phaser",
+    "embed"
+  ],
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arissafram/hot-dog-run.git"
+  },
+  "homepage": "https://github.com/arissafram/hot-dog-run#readme",
+  "bugs": "https://github.com/arissafram/hot-dog-run/issues",
+  "scripts": {
+    "build": "npm run build:game && npm run build:react",
+    "build:game": "esbuild src/index.js --bundle --format=esm --minify --target=es2019 --outfile=dist/hot-dog-run.js --log-override:duplicate-object-key=silent --banner:js=\"/*! Hot Dog Run. Bundles Phaser 3.80.1 (MIT License, (c) Richard Davey, Photon Storm Ltd.) */\"",
+    "build:react": "esbuild src/react.js --bundle --format=esm --minify --target=es2019 --external:react --external:hot-dog-run --outfile=dist/react.js",
+    "watch": "npm run build:game -- --watch",
+    "sprites": "node tools/make_sprites.js && node tools/build_sprites.js",
+    "prepare": "npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=17"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.2",
+    "jpeg-js": "^0.4.4"
+  }
+}
