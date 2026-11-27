@@ -4,14 +4,22 @@ A one-button endless runner: jump the hot dog over grills and ketchup.
 
 ![Gameplay](./assets/gameplay.png)
 
+## Install
+
+```bash
+npm install github:arissafram/hot-dog-run
+```
+
+Installing builds `dist/` automatically.
+
 ## Embed
 
 ```html
-<script type="module" src="https://unpkg.com/hot-dog-run"></script>
+<script type="module">import 'hot-dog-run';</script>
 <hot-dog-run style="width: 800px; height: 360px"></hot-dog-run>
 ```
 
-Or install it with `npm install hot-dog-run` and use it from JavaScript or React:
+Or from JavaScript or React:
 
 ```js
 import { mount } from 'hot-dog-run';

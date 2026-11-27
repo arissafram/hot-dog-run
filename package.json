@@ -2,6 +2,7 @@
   "name": "hot-dog-run",
   "version": "0.1.0",
   "description": "A one-button endless runner you can drop into any page as <hot-dog-run>, mount(el) or <HotDogRun />.",
+  "private": true,
   "type": "module",
   "main": "./dist/hot-dog-run.js",
   "module": "./dist/hot-dog-run.js",
